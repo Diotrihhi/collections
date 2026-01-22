@@ -1,0 +1,7 @@
+sudo nordvpn connect
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo iptables -F 
+sudo iptables -t nat -F
+sudo iptables -t nat -A POSTROUTING -o nordlynx -j MASQUERADE
+sudo iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i end0 -o nordlynx -j ACCEPT
